@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Alarm</title>
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            background: #0f3854;
+            background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+            background-size: 100%;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        #clock {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffffff;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #daf6ff;
+            text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+        }
+        .time {
+            letter-spacing: 0.05em;
+            font-size: 80px;
+            padding: 5px 0;
+        }
+        .date {
+            letter-spacing: 0.1em;
+            font-size: 24px;
+        }
+        .text {
+            letter-spacing: 0.1em;
+            font-size: 12px;
+            padding: 20px 0 0;
+        }
+        button {
+            background-color: #00b3b3; 
+            color: white;
+            font-size: 18px;
+            padding: 12px 30px; 
+            border: none;
+            border-radius: 50px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #009999; 
+        }
+    </style>
+</head>
+<body>
+<div id="clock">
+    <div class="date" id="date"><p ></p></div>
+    <p class="time" id="time"></p>
+    <button id="btn"> Set Alarm </button>
+</div>
+<script>
+    const datePara=document.getElementById('date');
+    const timePara=document.getElementById('time');
+    let date=new Date();
+    const month=['January','Febraury','March','April','May','June','July','August','September',
+    'October','November','December'];
+    const days=['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
+    datePara.textContent=`${date.getDate()} ${month[date.getMonth()]} ${date.getFullYear()}`
+    let day=document.createElement('p');
+    day.textContent=days[date.getDay()];
+    datePara.append(day);
+    timePara.textContent=`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    setInterval(()=>{
+        date=new Date();
+        timePara.textContent=`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    },1000);
+
+    const btn=document.getElementById('btn');
+    btn.addEventListener('click',(event)=>{
+        window.location.href="set_alarm.html";
+    })
+
+</script>
+

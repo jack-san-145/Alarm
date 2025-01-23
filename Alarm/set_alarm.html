@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Set Alarm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f3854;
+            background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        input[type="time"] {
+            font-size: 18px;
+            padding: 8px;
+            border: 2px solid #00b3b3;
+            border-radius: 5px;
+            background-color: #0a2e38;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="time"]:focus {
+            outline: none;
+            border-color: #00cccc;
+        }
+        button {
+            background-color: #00b3b3; 
+            color: white;
+            font-size: 18px;
+            padding: 12px 30px; 
+            border: none;
+            border-radius: 50px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #009999; 
+        }
+        form {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 id="h1">Select Alarm Time</h1>
+        <form id="alarmForm">
+            <label for="alarmTime">Choose Alarm Time:</label>
+            <input type="time" id="alarmTime" name="alarmTime" required>
+            <br><br>
+            <button type="button" id="confirm">Set Alarm</button>
+        </form>
+    </div>
+    <audio id="ringtone">
+        <source src="Kgf_theme.mp3" type="audio/mp3">
+    </audio>
+</body>
+<script>
+    const val=document.getElementById('alarmTime');
+    const btn=document.getElementById('confirm');
+    let time;
+
+    function compare(){
+        setInterval(()=>{
+        time=new Date();
+        const alarm=document.getElementById('ringtone');
+        const h1=document.getElementById('h1');
+        if(time.getHours()==hr && time.getMinutes()==min)
+        {
+            alarm.play();
+            h1.textContent='.......Alarm is Ringing.......';
+        }
+        else if(time.getHours()!=hr || time.getMinutes()!=min){
+            alarm.pause();
+            h1.textContent='Select Alarm Time';
+        }
+    },1000)
+    }
+    let hr,min;
+    btn.addEventListener('click',(event)=>{
+        hr=+((val.value).slice(0,2));
+        min=+((val.value).slice(3));
+        compare();
+        btn.textContent='Done';
+        h1.textContent='Alarm will go off soon';
+    })
+
+</script>
+</html>
